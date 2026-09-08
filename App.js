@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import {
   View,
@@ -18,9 +19,9 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=8')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
+    axios
+      .get('https://fakestoreapi.com/products?limit=8')
+      .then((response) => setProducts(response.data))
       .catch((error) => console.error('Lỗi tải sản phẩm:', error))
       .finally(() => setLoading(false));
   }, []);
